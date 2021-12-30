@@ -1,0 +1,16 @@
+# install_yumgroup.yml
+
+---
+ - hosts: targets
+   become: true
+   tasks:
+     - name: Installing Development Group
+       yum:
+         name:
+           - '@development tools'
+     - name: Installing Selected Packages
+       yum:
+         name:
+           - wget
+           - unzip
+           - yum-utils

@@ -1,0 +1,4 @@
+
+[targets]
+target1 ansible_host=anstrg1.indiee.com
+target2 ansible_host=anstrg2.indiee.com

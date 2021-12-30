@@ -1,0 +1,18 @@
+# install_yumgroup.yml
+
+---
+ - hosts: targets
+   become: true
+   tasks:
+     - name: Installing Development Group
+       yum:
+         name:
+           - '@development tools'
+     - name: Installing Selected Packages
+       yum: name={{ item }} state=present update_cache=yes
+       with_items:
+           - wget
+           - unzip
+           - yum-utils
+           - git
+           - curl

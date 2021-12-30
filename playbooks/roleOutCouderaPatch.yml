@@ -1,0 +1,23 @@
+# roleOutClouderaPatch.yml
+
+---
+  - hosts: targets
+    become: yes
+    tasks:
+      - name: Installing unzip
+        yum: name=unzip state=present
+      - name: Create staging directory
+        file:
+          path: /home/adminn/clouderaPatch
+          state: directory
+      - name: Role out Cloudera zip patch and unzip
+        unarchive:
+          src: /home/adminn/ansible_project/sources/playbooks/cloudera-scripts-for-log4j-main.zip
+          dest: /home/adminn/clouderaPatch
+      - name: Running the shell
+        script:
+        args:
+          chdir: /home/adminn/clouderaPatch
+          cmd: /home/adminn/ansible_project/sources/playbooks/sample.sh
+          executable: /bin/bash
+          create: /home/adminn/clouderaPatch/allowed.run

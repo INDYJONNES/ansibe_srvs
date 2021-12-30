@@ -1,0 +1,19 @@
+# fileCopy.yml
+---
+  - hosts: targets
+    tasks:
+      - name: File Copying Test
+        copy:
+         src: /home/adminn/ansible_project/sources/playbooks/testFile.txt
+         dest: /home/adminn/testFileCopied.txt
+         mode: 0755
+      - name: Change the File
+        replace:
+          path: /home/adminn/testFileCopied.txt
+          regexp: '^(\w+)(\s+)(=)(\s+)(\w+)$'
+          replace: '\1\2\3\4\5 BANIK'
+      - name: Copy / create a new file aad add host name
+        copy:
+          dest: /home/adminn/new_file.txt
+          content: "{{ ansible_default_ipv4['address'] }}"
+          mode: 0755

@@ -1,0 +1,14 @@
+# addToFile.yml
+
+---
+   - hosts: targets
+     become: no
+     tasks:
+       - name: Adding a file block in a destination file
+         blockinfile:
+            path: /home/adminn/my_hosts
+            block: "{{ lookup('file', '/home/adminn/ansible_project/sources/playbooks/hosts.default') }}"
+            marker_begin: "Added Hosts"
+            marker_end: "--END Hosts--"
+            insertafter: EOF
+            create: yes
